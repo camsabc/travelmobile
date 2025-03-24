@@ -6,11 +6,15 @@ const bcrypt = require("bcryptjs");
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
 
+const cors = require("cors");
+
 const corsOptions = {
-    origin: ["*"], 
-    credentials: true,
-    optionsSuccessStatus: 200, 
+    origin: ["http://localhost:8081", "https://travelmobile.onrender.com"], // Allow specific domains
+    credentials: true, // Allow cookies, Authorization headers, etc.
+    optionsSuccessStatus: 200,
 };
+
+app.use(cors(corsOptions));
 
 
 const generateToken = (booking) => {
@@ -392,7 +396,7 @@ app.post('/forgotpassword', async (req, res) => {
 
         // Generate a password reset token
         const resetToken = jwt.sign({ email: user.email }, JWT_SECRET, { expiresIn: '1h' });
-        const resetLink = `http://${IP}:8082/reset-password?token=${resetToken}`;
+        const resetLink = `https://travelmobile.onrender.com/reset-password?token=${resetToken}`;
         console.log('Reset link generated:', resetLink);
 
         const generatedOtp = Math.floor(100000 + Math.random() * 900000);
