@@ -3,9 +3,9 @@ const mongoose = require('mongoose');
 const RentalBookingSchema = new mongoose.Schema({
   userEmail: String,
   carName: String,
-  lastName: String,
-  firstName: String,
-  middleName: String,
+  lastname: String,
+  firstname: String,
+  middlename: String,
   emailAddress: String,
   mobileNumber: Number,
   numberOfPersons: Number,

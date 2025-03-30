@@ -2,17 +2,17 @@ const mongoose = require('mongoose');
 
 const FlightBookingSchema = new mongoose.Schema({
   userEmail: String,
-  lastName: String,
-  firstName: String,
-  middleName: String,
+  lastname: String,
+  firstname: String,
+  middlename: String,
   emailAddress: String,
   mobileNumber: Number,
   numberOfPersons: Number,
   paxList: [{
     paxNumber: Number,
-    lastName: String,
-    firstName: String,
-    middleName: String,
+    lastname: String,
+    firstname: String,
+    middlename: String,
     birthdate: Date,
     age: Number,
     category: { type: String, enum: ['Child', 'Adult', 'Senior'], required: true },

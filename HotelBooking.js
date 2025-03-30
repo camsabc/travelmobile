@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 
 const HotelBookingSchema = new mongoose.Schema({
   userEmail: String,
-  lastName: String,
-  firstName: String,
-  middleName: String,
+  lastname: String,
+  firstname: String,
+  middlename: String,
   emailAddress: String,
   mobileNumber: Number,
   numberOfPersons: Number,
