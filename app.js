@@ -354,17 +354,17 @@ app.post('/userdata', async (req, res) => {
 
 
 
-app.get('/inquiry/:userId', async (req, res) => {
-    const { userId } = req.params;
+app.get('/inquiry/:email', async (req, res) => {
+    const { email } = req.params;
     
     try {
-        const user = await User.findById(userId);
+        const user = await User.findById(email);
         if (!user) {
             return res.status(404).json({ status: "Error", message: "User not found" });
         }
 
         // Fetch inquiries and bookings based on userId
-        const inquiries = await Inquiry.find({ userId });
+        const inquiries = await Inquiry.find({ email });
 
         console.log(inquiries);
 
