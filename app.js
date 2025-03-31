@@ -68,7 +68,7 @@ const JWT_SECRET = "hvdvay6ert72839289()aiyg8t87qt72393293883uhefiuh78ttq3ifi782
 
 const User = require('./UserDetails');
 const Booking = require('./Booking');
-
+const Inquiry = require('./Inquiry');
 
 require('./FlightBooking'); // Ensure BookingDetails.js defines your Booking model
 //const Booking = mongoose.model("FlightBooking");
@@ -366,10 +366,11 @@ app.get('/inquiry/:userId', async (req, res) => {
         // Fetch inquiries and bookings based on userId
         const inquiries = await Inquiry.find({ userId });
 
+        console.log(inquiries);
+
         return res.status(200).json({ 
             status: "Ok", 
-            inquiries,
-            bookings 
+            inquiries
         });
     } catch (error) {
         console.error('Error fetching inquiries and bookings:', error);
