@@ -364,8 +364,7 @@ app.get('/inquiry/:userId', async (req, res) => {
         }
 
         // Fetch inquiries and bookings based on userId
-        const inquiries = await InquiryModel.find({ userId });
-        const bookings = await Booking.find({ userId });
+        const inquiries = await Inquiry.find({ userId });
 
         return res.status(200).json({ 
             status: "Ok", 
