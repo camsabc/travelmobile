@@ -354,20 +354,29 @@ app.post('/userdata', async (req, res) => {
 
 
 
+app.get('/inquiry/:userId', async (req, res) => {
+    const { userId } = req.params;
+    
+    try {
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ status: "Error", message: "User not found" });
+        }
 
+        // Fetch inquiries and bookings based on userId
+        const inquiries = await InquiryModel.find({ userId });
+        const bookings = await Booking.find({ userId });
 
-
-
-
-
-
-
-
-
-
-
-
-
+        return res.status(200).json({ 
+            status: "Ok", 
+            inquiries,
+            bookings 
+        });
+    } catch (error) {
+        console.error('Error fetching inquiries and bookings:', error);
+        return res.status(500).json({ status: "Error", message: "Failed to fetch inquiries and bookings" });
+    }
+});
 
 
 
