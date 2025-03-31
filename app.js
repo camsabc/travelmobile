@@ -358,12 +358,12 @@ app.get('/inquiry/:email', async (req, res) => {
     const { email } = req.params;
     
     try {
-        const user = await User.findById(email);
+        const user = await User.findOne({ email });
         if (!user) {
             return res.status(404).json({ status: "Error", message: "User not found" });
         }
 
-        // Fetch inquiries and bookings based on userId
+        // Fetch inquiries based on email
         const inquiries = await Inquiry.find({ email });
 
         console.log(inquiries);
@@ -373,10 +373,11 @@ app.get('/inquiry/:email', async (req, res) => {
             inquiries
         });
     } catch (error) {
-        console.error('Error fetching inquiries and bookings:', error);
-        return res.status(500).json({ status: "Error", message: "Failed to fetch inquiries and bookings" });
+        console.error('Error fetching inquiries:', error);
+        return res.status(500).json({ status: "Error", message: "Failed to fetch inquiries" });
     }
 });
+
 
 
 
