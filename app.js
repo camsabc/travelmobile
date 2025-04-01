@@ -69,6 +69,7 @@ const JWT_SECRET = "hvdvay6ert72839289()aiyg8t87qt72393293883uhefiuh78ttq3ifi782
 const User = require('./UserDetails');
 const Booking = require('./Booking');
 const Inquiry = require('./Inquiry');
+const Feedback = require('./Feedback');
 
 require('./FlightBooking'); // Ensure BookingDetails.js defines your Booking model
 //const Booking = mongoose.model("FlightBooking");
@@ -379,6 +380,50 @@ app.get('/inquiry/:email', async (req, res) => {
 });
 
 
+app.post('/feedback', async (req, res) => {
+    try {
+        const {
+            name,
+            service,
+            duration,
+            remarkLike,
+            remarkImprove,
+            reco,
+            rateBookingExperience,
+            rateCustomerService,
+            ratePricing,
+            rateOverallExperience
+        } = req.body;
+
+        const newFeedback = new Feedback({
+            name,
+            service,
+            duration,
+            remarkLike: remarkLike || "",
+            remarkImprove: remarkImprove || "",
+            reco: reco || "",
+            rateDate: new Date(),
+            rateBookingExperience: rateBookingExperience || 0,
+            rateCustomerService: rateCustomerService || 0,
+            ratePricing: ratePricing || 0,
+            rateOverallExperience
+        });
+
+        const feedback = await newFeedback.save();
+
+        return res.status(201).json({
+            status: "Ok",
+            message: "Feedback successfully submitted",
+            feedback
+        });
+    } catch (err) {
+        console.error('Error submitting feedback:', err);
+        return res.status(500).json({
+            status: "Error",
+            message: "Failed to submit feedback"
+        });
+    }
+});
 
 
 
