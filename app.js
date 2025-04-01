@@ -69,7 +69,7 @@ const JWT_SECRET = "hvdvay6ert72839289()aiyg8t87qt72393293883uhefiuh78ttq3ifi782
 const User = require('./UserDetails');
 const Booking = require('./Booking');
 const Inquiry = require('./Inquiry');
-const Feedback = require('./Feedback');
+const FeedbackModel = require('./Feedback');
 
 require('./FlightBooking'); // Ensure BookingDetails.js defines your Booking model
 //const Booking = mongoose.model("FlightBooking");
@@ -380,7 +380,8 @@ app.get('/inquiry/:email', async (req, res) => {
 });
 
 
-app.post('/feedback', async (req, res) => {
+
+app.post('/create-feedback', async (req, res) => {
     try {
         const {
             name,
@@ -395,7 +396,7 @@ app.post('/feedback', async (req, res) => {
             rateOverallExperience
         } = req.body;
 
-        const newFeedback = new Feedback({
+        const newFeedback = new FeedbackModel({
             name,
             service,
             duration,

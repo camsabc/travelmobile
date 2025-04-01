@@ -54,6 +54,6 @@ const FeedbackSchema = mongoose.Schema({
     }
 });
 
-const Feedback = mongoose.model('Feedback', FeedbackSchema);
+const FeedbackModel = mongoose.model('Feedback', FeedbackSchema);
 
-module.exports = Feedback;
+module.exports = FeedbackModel;
