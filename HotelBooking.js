@@ -6,7 +6,7 @@ const HotelBookingSchema = new mongoose.Schema({
   firstname: String,
   middlename: String,
   emailAddress: String,
-  mobileNumber: Number,
+  contactNumber: Number,
   numberOfPersons: Number,
   roomType: String,
   startDate: Date,

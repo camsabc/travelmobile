@@ -249,7 +249,7 @@ const calculateAge = (birthdate) => {
 
 app.post('/bookings', async (req, res) => {
     try {
-        const { userEmail, lastname, firstname, emailAddress, contactNumber, numberOfPersons, paxList, startDate, endDate, departureLocation, arrivalLocation, remarks, serviceType } = req.body;
+        const { userEmail, lastname, firstname, emailAddress, contactNumber, numberOfPersons, paxList, startDate, endDate, airportDeparture, airportArrival, remarks, serviceType } = req.body;
 
         const formattedPaxList = paxList.map((pax, index) => {
             const age = calculateAge(pax.birthdate); // Calculate age first
@@ -273,8 +273,8 @@ app.post('/bookings', async (req, res) => {
             paxList: formattedPaxList,
             startDate,
             endDate,
-            departureLocation,
-            arrivalLocation,
+            airportDeparture,
+            airportArrival,
             remarks,
             serviceType
         });

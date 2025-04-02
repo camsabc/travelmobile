@@ -6,7 +6,7 @@ const FlightBookingSchema = new mongoose.Schema({
   firstname: String,
   middlename: String,
   emailAddress: String,
-  mobileNumber: Number,
+  contactNumber: Number,
   numberOfPersons: Number,
   paxList: [{
     paxNumber: Number,
@@ -19,8 +19,8 @@ const FlightBookingSchema = new mongoose.Schema({
   },],
   startDate: Date,
   endDate: Date,
-  departureLocation: String,
-  arrivalLocation: String,
+  airportDeparture: String,
+  airportArrival: String,
   remarks: String,
   serviceType: String,
 });
