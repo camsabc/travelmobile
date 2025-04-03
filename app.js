@@ -146,6 +146,9 @@ app.post('/create-booking', async (req, res) => {
         officeDetails,
         fullAddress,
         landmark,
+        companyName,
+        companyAddress,
+        contactPerson,
         num,
         type,
         db
@@ -211,10 +214,13 @@ app.post('/create-booking', async (req, res) => {
         officeNumber,
         officeDetails,
         fullAddress,
+        companyName,
+        companyAddress,
+        contactPerson,
         landmark,
         num: generateRandomNumber(), 
         type,
-        db: 'booking'
+        db: 'quotation'
     });
 
     newBooking.save()
