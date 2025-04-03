@@ -354,12 +354,14 @@ app.post('/userdata', async (req, res) => {
 
         // Fetch bookings and hotel bookings
         const bookings = await Booking.find({ email: useremail });
+        const inquiries = await Inquiry.find({ email: useremail });
         
         // Return user data along with bookings
         return res.status(200).json({ 
             status: "Ok", 
             data: userData, 
             bookings: bookings,
+            inquiries: inquiries,
         });
     } catch (error) {
         console.error('Error fetching user data:', error);
