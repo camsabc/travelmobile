@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const BookingSchema = mongoose.Schema({
+const QuotationSchema = mongoose.Schema({
     firstname: {
         type: String,
         required: false
@@ -55,9 +55,6 @@ const BookingSchema = mongoose.Schema({
         type: String
     },
     status: {
-        type: String
-    },
-    class: {
         type: String
     },
     num: {
@@ -209,20 +206,24 @@ const BookingSchema = mongoose.Schema({
         type: String,
         required: false
     },
-    note: {
-        type: String,
-        required: false
-    },
     destination: {
         type: String,
         required: false
     },
+    file: {
+        type: String,
+        required: false
+    },
+    payment: {
+        type: String,
+        required: false
+    },
     pickupTime: {
-        type: Date,
+        type: String,
         required: false
     },
     dropoffTime: {
-        type: Date,
+        type: String,
         required: false
     },
     pickupDate: {
@@ -232,9 +233,107 @@ const BookingSchema = mongoose.Schema({
     dropoffDate: {
         type: Date,
         required: false
-    }
+    },
+    disabled: {
+        type: String,
+        required: false
+    },
+    ar: {
+        type: String,
+        required: false
+    },
+
+
+    completeVisaForm: {
+        type: String,
+        required: false
+    },
+    origPass: {
+        type: String,
+        required: false
+    },
+    proofFunds: {
+        type: String,
+        required: false
+    },
+    idPic: {
+        type: String,
+        required: false
+    },
+    psaBirthCert: {
+        type: String,
+        required: false
+    },
+    latestItr: {
+        type: String,
+        required: false
+    },
+
+
+    businessReg: {
+        type: String,
+        required: false
+    },
+    bankStatement: {
+        type: String,
+        required: false
+    },
+    businessPermit: {
+        type: String,
+        required: false
+    },
+    recentItr: {
+        type: String,
+        required: false
+    },
+
+
+    employCert: {
+        type: String,
+        required: false
+    },
+    companyId: {
+        type: String,
+        required: false
+    },
+    itr: {
+        type: String,
+        required: false
+    },
+
+    
+    schoolCert: {
+        type: String,
+        required: false
+    },
+    schoolId: {
+        type: String,
+        required: false
+    },
+    birthCert: {
+        type: String,
+        required: false
+    },
+    bankCert: {
+        type: String,
+        required: false
+    },
+
+    companyName: {
+        type: String,
+        required: false
+    },
+    contactPerson: {
+        type: String,
+        required: false
+    },
+    companyAddress: {
+        type: String,
+        required: false
+    },
 });
 
-const Booking = mongoose.model('Booking', BookingSchema);
+
+const Booking = mongoose.model('Quotation', QuotationSchema);
 
 module.exports = Booking;

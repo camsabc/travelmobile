@@ -6,7 +6,7 @@ const RentalBookingSchema = new mongoose.Schema({
   lastname: String,
   firstname: String,
   middlename: String,
-  emailAddress: String,
+  email: String,
   contactNumber: Number,
   numberOfPersons: Number,
   startDate: Date,
