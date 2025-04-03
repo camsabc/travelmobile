@@ -122,6 +122,7 @@ app.post('/create-booking', async (req, res) => {
         municipalityBirth,  
         firstnameFather,
         middlenameFather,
+        package,
         lastnameFather,
         countryCitizenshipFather,
         firstnameMother,
@@ -149,7 +150,10 @@ app.post('/create-booking', async (req, res) => {
         companyName,
         companyAddress,
         contactPerson,
+        schoolName,
+        schoolAddress,
         num,
+        destination,
         type,
         db
     } = req.body;
@@ -174,6 +178,7 @@ app.post('/create-booking', async (req, res) => {
         airportDeparture,
         airportArrival,
         preferredHotel,
+        package,
         budgetRange,
         pickuploc,
         dropoffloc,
@@ -216,8 +221,11 @@ app.post('/create-booking', async (req, res) => {
         fullAddress,
         companyName,
         companyAddress,
+        schoolName,
+        schoolAddress,
         contactPerson,
         landmark,
+        destination,
         num: generateRandomNumber(), 
         type,
         db: 'quotation'

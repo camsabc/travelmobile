@@ -331,6 +331,23 @@ const QuotationSchema = mongoose.Schema({
         type: String,
         required: false
     },
+
+    schoolName: {
+        type: String,
+        required: false
+    },
+    schoolAddress: {
+        type: String,
+        required: false
+    },
+    pickupTime: {
+        type: String,
+        required: false
+    },
+    package: {
+        type: String,
+        required: false
+    },
 });
 
 
