@@ -218,10 +218,6 @@ const QuotationSchema = mongoose.Schema({
         type: String,
         required: false
     },
-    pickupTime: {
-        type: String,
-        required: false
-    },
     dropoffTime: {
         type: String,
         required: false
