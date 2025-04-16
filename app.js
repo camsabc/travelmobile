@@ -581,7 +581,39 @@ const isValidCode = (storedOtp, inputCode) => {
     }
 });
 
+app.post('/resend-otp', async (req, res) => {
+    const { email } = req.body;
 
+    if (!email) {
+        return res.status(400).json({ error: 'Email is required' });
+    }
+
+    try {
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        const generatedOtp = Math.floor(100000 + Math.random() * 900000);
+        otpStore[email] = { otp: generatedOtp, expiresAt: Date.now() + 5 * 60 * 1000 }; // Store new OTP with expiration
+
+        const htmlContent = `
+        <p>Hi ${user.firstname},</p>
+        <p>Your new OTP code for verification is:</p>
+        <h2 style="font-weight: bold; color: #000;">${generatedOtp}</h2>
+        <p>This code is valid for 5 minutes.</p>
+        <p>If you did not initiate this request, please disregard this email.</p>
+        <p>Best regards,</p>
+        <p>TravelWheels</p>
+        `;
+
+        await sendEmail(email, 'Resend OTP', htmlContent);
+        res.status(200).json({ message: 'OTP has been resent to your email' });
+    } catch (error) {
+        console.error('Error resending OTP:', error);
+        res.status(500).json({ error: 'Failed to resend OTP' });
+    }
+});
 
 
 app.post('/reset-password', async (req, res) => {
