@@ -43,6 +43,10 @@ const QuotationSchema = mongoose.Schema({
         type: String,
         required: false
     },
+    pack: {
+        type: String,
+        required: false
+    },
     numOfPerson: {
         type: Number,
         required: false
