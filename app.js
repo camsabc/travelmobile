@@ -715,7 +715,7 @@ app.post('/send-email', (req, res) => {
 
 app.post('/update-user', async (req, res) => {
     const { token, firstname, lastname, email, contactNumber, bday, newPassword, profileImage } = req.body;
-  
+
     try {
         const decoded = jwt.verify(token, JWT_SECRET);
         const userEmail = decoded.email;
@@ -724,33 +724,24 @@ app.post('/update-user', async (req, res) => {
         if (!user) {
             return res.status(404).send('User not found');
         }
-  
+
         if (firstname) user.firstname = firstname;
         if (lastname) user.lastname = lastname;
         if (email) user.email = email;
         if (contactNumber) user.contactNumber = contactNumber;
         if (bday) user.bday = bday;
-  
+
         if (newPassword) {
             user.password = await bcrypt.hash(newPassword, 10);
         }
-  
-// Handle Base64 image
-       if (profileImage) {
-            const base64Data = profileImage.split(',')[1]; // Get the base64 part
-            const buffer = Buffer.from(base64Data, 'base64');
 
-            const uploadsDir = path.join(__dirname, 'uploads');
-            // Create uploads directory if it doesn't exist
-            if (!fs.existsSync(uploadsDir)) {
-                fs.mkdirSync(uploadsDir);
-            }
-
-            const filePath = path.join(uploadsDir, `${userEmail}-profile.jpg`); // Define your file path
-            fs.writeFileSync(filePath, buffer); // Save the image
-            user.profileImage = `uploads/${userEmail}-profile.jpg`; // Save the path in the user model
+        // Store full base64 string directly in profileImage field
+        if (profileImage) {
+            user.profileImage = profileImage;
+        } else {
+            user.profileImage = null; // Clear profile image if none provided
         }
-  
+
         await user.save();
         res.status(200).send('User updated successfully');
     } catch (error) {
