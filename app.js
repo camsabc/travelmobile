@@ -735,12 +735,19 @@ app.post('/update-user', async (req, res) => {
         }
   
 // Handle Base64 image
-        if (profileImage) {
+       if (profileImage) {
             const base64Data = profileImage.split(',')[1]; // Get the base64 part
             const buffer = Buffer.from(base64Data, 'base64');
-            const filePath = `uploads/${userEmail}-profile.jpg`; // Define your file path
+
+            const uploadsDir = path.join(__dirname, 'uploads');
+            // Create uploads directory if it doesn't exist
+            if (!fs.existsSync(uploadsDir)) {
+                fs.mkdirSync(uploadsDir);
+            }
+
+            const filePath = path.join(uploadsDir, `${userEmail}-profile.jpg`); // Define your file path
             fs.writeFileSync(filePath, buffer); // Save the image
-            user.profileImage = filePath; // Save the path in the user model
+            user.profileImage = `uploads/${userEmail}-profile.jpg`; // Save the path in the user model
         }
   
         await user.save();
