@@ -711,7 +711,7 @@ app.post('/send-email', (req, res) => {
 
 
 
-app.post('/update-user', upload.single('profileImage'), async (req, res) => {
+app.post('/update-user', async (req, res) => {
     const { token, firstname, lastname, email, contactNumber, bday, newPassword, profileImage } = req.body;
   
     try {
@@ -738,9 +738,6 @@ app.post('/update-user', upload.single('profileImage'), async (req, res) => {
             user.profileImage = null;
         } else if (profileImage) {
             user.profileImage = profileImage;
-        }
-        if (req.file) {
-          user.profileImage = `http://your-server-url/uploads/${req.file.filename}`; // Adjust the URL as needed
         }
   
         await user.save();
