@@ -733,11 +733,13 @@ app.post('/update-user', async (req, res) => {
             user.password = await bcrypt.hash(newPassword, 10);
         }
   
-        // Updated code to clear profileImage if null or empty string
-        if (profileImage === null || profileImage === '') {
-            user.profileImage = null;
-        } else if (profileImage) {
-            user.profileImage = profileImage;
+// Handle Base64 image
+        if (profileImage) {
+            const base64Data = profileImage.split(',')[1]; // Get the base64 part
+            const buffer = Buffer.from(base64Data, 'base64');
+            const filePath = `uploads/${userEmail}-profile.jpg`; // Define your file path
+            fs.writeFileSync(filePath, buffer); // Save the image
+            user.profileImage = filePath; // Save the path in the user model
         }
   
         await user.save();
