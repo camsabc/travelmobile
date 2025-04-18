@@ -5,6 +5,8 @@ const cors = require('cors');
 const bcrypt = require("bcryptjs");
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
+const multer = require('multer');
+const path = require('path');
 
 const corsOptions = {
     origin: ["http://localhost:8081", "https://travelmobile.onrender.com"], // Allow specific domains
@@ -24,6 +26,18 @@ const handleError = (err, res) => {
     console.error(err);
     res.status(500).json({ error: 'Internal Server Error', message: err.message });
 };
+
+// Set up storage for multer
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/'); // Directory to save uploaded images
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname)); // Unique filename
+  }
+});
+
+const upload = multer({ storage });
 
 // Create a transporter object using SMTP transport
 const transporter = nodemailer.createTransport({
@@ -711,7 +725,7 @@ app.post('/send-email', (req, res) => {
 
 
 
-app.post('/update-user', async (req, res) => {
+app.post('/update-user', upload.single('profileImage'), async (req, res) => {
     const { token, firstname, lastname, email, contactNumber, bday, newPassword, profileImage } = req.body;
   
     try {
@@ -738,6 +752,9 @@ app.post('/update-user', async (req, res) => {
             user.profileImage = null;
         } else if (profileImage) {
             user.profileImage = profileImage;
+        }
+        if (req.file) {
+          user.profileImage = `http://your-server-url/uploads/${req.file.filename}`; // Adjust the URL as needed
         }
   
         await user.save();
