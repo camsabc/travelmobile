@@ -6,6 +6,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
 const fs = require('fs');
+const path = require('path');
 
 const corsOptions = {
     origin: ["http://localhost:8081", "https://travelmobile.onrender.com"], // Allow specific domains
