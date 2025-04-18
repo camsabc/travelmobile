@@ -715,17 +715,14 @@ app.post('/update-user', async (req, res) => {
     const { token, firstname, lastname, email, contactNumber, bday, newPassword, profileImage } = req.body;
   
     try {
-        // Verify the token and get the user email
-        const decoded = jwt.verify(token, JWT_SECRET); // Ensure JWT_SECRET is the correct secret key
-        const userEmail = decoded.email; // Adjust based on how you encode the JWT payload
+        const decoded = jwt.verify(token, JWT_SECRET);
+        const userEmail = decoded.email;
 
-        // Find the user by email
         const user = await User.findOne({ email: userEmail });
         if (!user) {
             return res.status(404).send('User not found');
         }
   
-        // Update user fields
         if (firstname) user.firstname = firstname;
         if (lastname) user.lastname = lastname;
         if (email) user.email = email;
@@ -733,18 +730,20 @@ app.post('/update-user', async (req, res) => {
         if (bday) user.bday = bday;
   
         if (newPassword) {
-            user.password = await bcrypt.hash(newPassword, 10); // Use async hashing
+            user.password = await bcrypt.hash(newPassword, 10);
         }
   
-        if (profileImage) {
+        // Updated code to clear profileImage if null or empty string
+        if (profileImage === null || profileImage === '') {
+            user.profileImage = null;
+        } else if (profileImage) {
             user.profileImage = profileImage;
         }
   
-        // Save updated user
         await user.save();
         res.status(200).send('User updated successfully');
     } catch (error) {
-        console.error('Error updating user:', error.message); // Improved logging
+        console.error('Error updating user:', error.message);
         res.status(500).send(`Internal Server Error: ${error.message}`);
     }
 });
