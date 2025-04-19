@@ -444,7 +444,16 @@ app.post('/create-feedback', async (req, res) => {
     }
 });
 
-
+// GET endpoint to fetch all feedbacks
+app.get('/feedbacks', async (req, res) => {
+  try {
+    const feedbacks = await FeedbackModel.find().sort({ rateDate: -1 });
+    res.status(200).json({ status: 'Ok', feedbacks });
+  } catch (error) {
+    console.error('Error fetching feedbacks:', error);
+    res.status(500).json({ status: 'Error', message: 'Failed to fetch feedbacks' });
+  }
+});
 
 
 
