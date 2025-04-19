@@ -82,6 +82,10 @@ const QuotationSchema = mongoose.Schema({
         type: String,
         required: false
     },
+    preferredAirline: {
+        type: String,
+        required: false
+    },
     budgetRange: {
         type: String,
         required: false
