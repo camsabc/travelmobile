@@ -312,7 +312,31 @@ app.post('/bookings', async (req, res) => {
 });
 
 
+app.post('/bookings/:id/attach-payment', async (req, res) => {
+  const bookingId = req.params.id;
+  const { payment } = req.body;
 
+  if (!payment) {
+    return res.status(400).json({ error: 'Payment proof is required' });
+  }
+
+  try {
+    const updatedBooking = await Booking.findByIdAndUpdate(
+      bookingId,
+      { payment }, // Assuming 'payment' field exists in Booking schema
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedBooking) {
+      return res.status(404).json({ error: 'Booking not found' });
+    }
+
+    res.json({ message: 'Payment proof attached successfully', booking: updatedBooking });
+  } catch (error) {
+    console.error('Error attaching payment proof:', error);
+    res.status(500).json({ error: 'Failed to attach payment proof' });
+  }
+});
 
 app.get('/bookings/:id', async (req, res) => {
     const bookingId = req.params.id;
