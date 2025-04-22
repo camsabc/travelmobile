@@ -369,6 +369,30 @@ app.get('/bookings', async (req, res) => {
     }
 });
 
+app.post('/bookings/changeStatus', async (req, res) => {
+  const { quotationId, status } = req.body;
+
+  if (!quotationId || !status) {
+    return res.status(400).json({ error: 'quotationId and status are required' });
+  }
+
+  try {
+    const updatedBooking = await Booking.findByIdAndUpdate(
+      quotationId,
+      { status },
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedBooking) {
+      return res.status(404).json({ error: 'Booking not found' });
+    }
+
+    res.json({ message: 'Booking status updated successfully', booking: updatedBooking });
+  } catch (error) {
+    console.error('Failed to update booking status:', error);
+    res.status(500).json({ error: 'Failed to update booking status' });
+  }
+});
 
 app.post('/userdata', async (req, res) => {
     const { token } = req.body;
