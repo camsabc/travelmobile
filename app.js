@@ -107,7 +107,7 @@ app.post('/create-booking', async (req, res) => {
         airportArrival,
         numberOfPersons,
         pack,
-        paxlist,
+        paxList,
         preferredHotel,
         budgetRange,
         pickuploc,
