@@ -47,7 +47,7 @@ const QuotationSchema = mongoose.Schema({
         type: String,
         required: false
     },
-    numberOfPerson: {
+    numberOfPersons: {
         type: Number,
         required: false
     },
