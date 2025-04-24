@@ -327,7 +327,10 @@ app.post('/bookings/:id/attach-payment', async (req, res) => {
   try {
     const updatedBooking = await Booking.findByIdAndUpdate(
       bookingId,
-      { payment }, // Assuming 'payment' field exists in Booking schema
+      {
+        payment,
+        status: "PAYMENT SENT" // Automatically change status here
+      },
       { new: true, runValidators: true }
     );
 
