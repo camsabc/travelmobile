@@ -39,6 +39,10 @@ const QuotationSchema = mongoose.Schema({
         type: String,
         required: false
     },
+     pickUpLocation: {
+        type: String,
+        required: false
+    },
     dropOffLocation: {
         type: String,
         required: false
