@@ -356,6 +356,11 @@ const QuotationSchema = mongoose.Schema({
         type: String,
         required: false
     },
+    requirementType:{
+	type: String,
+	required: false
+},
+
 });
 
 
