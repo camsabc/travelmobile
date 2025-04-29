@@ -198,6 +198,10 @@ const QuotationSchema = mongoose.Schema({
         type: String,
         required: false
     },
+    cityBirth: {
+        type: String,
+        required: false
+    },
     occupation: {
         type: String,
         required: false
