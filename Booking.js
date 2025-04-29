@@ -90,7 +90,7 @@ const QuotationSchema = mongoose.Schema({
         type: String,
         required: false
     },
-    budgetRange: {
+    roomType: {
         type: String,
         required: false
     },
