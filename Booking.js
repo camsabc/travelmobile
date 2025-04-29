@@ -27,6 +27,12 @@ const QuotationSchema = mongoose.Schema({
         age: { type: Number, required: false },
         birthdate: { type: Date, required: false },
     }],
+    paxList: [{
+        firstname: { type: String, required: false },
+        lastname: { type: String, required: false },
+        age: { type: Number, required: false },
+        birthdate: { type: Date, required: false },
+    }],
     startDate: {
         type: Date,
         required: false
@@ -202,6 +208,10 @@ const QuotationSchema = mongoose.Schema({
         type: String,
         required: false
     },
+    courierType: {
+        type: String,
+        required: false
+    },
     occupation: {
         type: String,
         required: false
@@ -210,7 +220,7 @@ const QuotationSchema = mongoose.Schema({
         type: Number,
         required: false
     },
-    officeDetails: {
+    officeAddress: {
         type: String,
         required: false
     },
