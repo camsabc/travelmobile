@@ -7,7 +7,6 @@ const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
 const fs = require('fs');
 const path = require('path');
-const pickedImages = req.body.pickedImages || {};
 
 const corsOptions = {
     origin: ["http://localhost:8081", "https://travelmobile.onrender.com"], // Allow specific domains
@@ -206,7 +205,7 @@ app.post('/create-booking', async (req, res) => {
         pickupDate,
         dropoffTime,
         selectedCountry,
-        mappedDocuments,
+        ...mappedDocuments,
         dropoffDate,
         airportDeparture,
         airportArrival,
