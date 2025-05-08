@@ -107,30 +107,11 @@ app.post('/create-booking', async (req, res) => {
         dropOffLocation,
         airportDeparture,
         cityBirth,
+        pickedImages = {},
         airportArrival,
         numberOfPersons,
         pack,
         paxList,
-        const mappedDocuments = {
-  bankCert: pickedImages.bankCertificate || null,
-  birthCert: pickedImages.birthCertificate || null,
-  businessPermit: pickedImages.businessPermit || null,
-  businessReg: pickedImages.businessRegistration || null,
-  employCert: pickedImages.certificateOfEmployment || null,
-  companyId: pickedImages.companyIdCopy || null,
-  completeVisaForm: pickedImages.completeVisaForm || null,
-  idPic: pickedImages.idPicture || null,
-  itr: pickedImages.itr || null,
-  latestItr: pickedImages.latestITR || null,
-  origPass: pickedImages.originalPassport || null,
-  personalBankStatement: pickedImages.personalBankStatement || null,
-  proofFunds: pickedImages.proofOfFunds || null,
-  psaBirthCert: pickedImages.psaBirthCertificate || null,
-  recentItr: pickedImages.recentITR || null,
-  schoolCert: pickedImages.schoolCertification || null,
-  schoolId: pickedImages.schoolId || null,
-  bankCert: pickedImages.bankCertificate || null,
-};
         preferredHotel,
         selectedCountry,
         roomType,
@@ -187,7 +168,26 @@ app.post('/create-booking', async (req, res) => {
         type,
         db
     } = req.body;
-
+ const mappedDocuments = {
+  bankCert: pickedImages.bankCertificate || null,
+  birthCert: pickedImages.birthCertificate || null,
+  businessPermit: pickedImages.businessPermit || null,
+  businessReg: pickedImages.businessRegistration || null,
+  employCert: pickedImages.certificateOfEmployment || null,
+  companyId: pickedImages.companyIdCopy || null,
+  completeVisaForm: pickedImages.completeVisaForm || null,
+  idPic: pickedImages.idPicture || null,
+  itr: pickedImages.itr || null,
+  latestItr: pickedImages.latestITR || null,
+  origPass: pickedImages.originalPassport || null,
+  personalBankStatement: pickedImages.personalBankStatement || null,
+  proofFunds: pickedImages.proofOfFunds || null,
+  psaBirthCert: pickedImages.psaBirthCertificate || null,
+  recentItr: pickedImages.recentITR || null,
+  schoolCert: pickedImages.schoolCertification || null,
+  schoolId: pickedImages.schoolId || null,
+  bankCert: pickedImages.bankCertificate || null,
+};
     /* Generates a random nine-digit number */
     const generateRandomNumber = () => Math.floor(100000000 + Math.random() * 900000000);
 
