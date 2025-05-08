@@ -200,6 +200,10 @@ const QuotationSchema = mongoose.Schema({
         type: String,
         required: false
     },
+    selectedCountry: {
+        type: String,
+        required: false
+    },
     city: {
         type: String,
         required: false
