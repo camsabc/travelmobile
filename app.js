@@ -299,7 +299,7 @@ const calculateAge = (birthdate) => {
 
 app.post('/bookings', async (req, res) => {
     try {
-        const { userEmail, lastname, firstname, email, contactNumber, numberOfPersons, paxList, startDate, endDate, airportDeparture, airportArrival, remarks, serviceType } = req.body;
+        const { userEmail, lastname, firstname, email, contactNumber, numberOfPersons, paxList, startDate, endDate, airportDeparture, airportArrival, remarks, serviceType, pickedImages = {} } = req.body;
 
         const formattedPaxList = paxList.map((pax, index) => {
             const age = calculateAge(pax.birthdate); // Calculate age first
@@ -312,7 +312,26 @@ app.post('/bookings', async (req, res) => {
                 category: age < 12 ? 'Child' : (age >= 60 ? 'Senior' : 'Adult'), // Assign category based on calculated age
             };
         });
-
+const mappedDocuments = {
+            bankCert: pickedImages.bankCertificate || null,
+            birthCert: pickedImages.birthCertificate || null,
+            businessPermit: pickedImages.businessPermit || null,
+            businessReg: pickedImages.businessRegistration || null,
+            employCert: pickedImages.certificateOfEmployment || null,
+            companyId: pickedImages.companyIdCopy || null,
+            completeVisaForm: pickedImages.completeVisaForm || null,
+            idPic: pickedImages.idPicture || null,
+            itr: pickedImages.itr || null,
+            latestItr: pickedImages.latestITR || null,
+            origPass: pickedImages.originalPassport || null,
+            bankStatement: pickedImages.personalBankStatement || null,
+            proofFunds: pickedImages.proofOfFunds || null,
+            psaBirthCert: pickedImages.psaBirthCertificate || null,
+            recentItr: pickedImages.recentITR || null,
+            schoolCert: pickedImages.schoolCertification || null,
+            schoolId: pickedImages.schoolId || null,
+            bankCert: pickedImages.bankCertificate || null,
+        };    
         const newBooking = new Booking({
             userEmail,
             lastname,
@@ -326,7 +345,8 @@ app.post('/bookings', async (req, res) => {
             airportDeparture,
             airportArrival,
             remarks,
-            serviceType
+            serviceType,
+            ...mappedDocuments
         });
 
         try {
