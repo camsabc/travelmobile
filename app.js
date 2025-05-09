@@ -258,6 +258,7 @@ app.post('/create-booking', async (req, res) => {
         companyName,
         companyAddress,
         schoolName,
+        pack,
         schoolAddress,
         contactPerson,
         landmark,
