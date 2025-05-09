@@ -299,7 +299,22 @@ const calculateAge = (birthdate) => {
 
 app.post('/bookings', async (req, res) => {
     try {
-        const { userEmail, lastname, firstname, email, contactNumber, numberOfPersons, paxList, startDate, endDate, airportDeparture, airportArrival, remarks, serviceType, pickedImages = {} } = req.body;
+        const { userEmail, lastname, firstname, email, contactNumber, numberOfPersons, paxList, startDate, endDate, airportDeparture, airportArrival, remarks, serviceType,  completeVisaForm,
+            idPic,
+            origPass,
+            proofFunds,
+            psaBirthCert,
+            latestItr,
+            businessReg,
+            businessPermit,
+            companyId,
+            employCert,
+            itr,
+            recentItr,
+            schoolCert,
+            schoolId,
+            bankCert,
+            bankStatement, } = req.body;
 
         const formattedPaxList = paxList.map((pax, index) => {
             const age = calculateAge(pax.birthdate); // Calculate age first
@@ -346,7 +361,22 @@ const mappedDocuments = {
             airportArrival,
             remarks,
             serviceType,
-            ...mappedDocuments
+             completeVisaForm,
+            idPic,
+            origPass,
+            proofFunds,
+            psaBirthCert,
+            latestItr,
+            businessReg,
+            businessPermit,
+            companyId,
+            employCert,
+            itr,
+            recentItr,
+            schoolCert,
+            schoolId,
+            bankCert,
+            bankStatement,
         });
 
         try {
