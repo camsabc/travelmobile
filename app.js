@@ -299,7 +299,7 @@ const calculateAge = (birthdate) => {
 
 app.post('/bookings', async (req, res) => {
     try {
-        const { userEmail, lastname, firstname, email, contactNumber, numberOfPersons, paxList, startDate, endDate, airportDeparture, airportArrival, remarks, serviceType,  completeVisaForm,
+        const { userEmail, lastname, pack, firstname, email, contactNumber, numberOfPersons, paxList, startDate, endDate, airportDeparture, airportArrival, remarks, serviceType,  completeVisaForm,
             idPic,
             origPass,
             proofFunds,
@@ -358,6 +358,7 @@ const mappedDocuments = {
             startDate,
             endDate,
             airportDeparture,
+            pack,
             airportArrival,
             remarks,
             serviceType,
