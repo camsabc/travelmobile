@@ -394,6 +394,30 @@ const mappedDocuments = {
     }
 });
 
+// POST endpoint to create a new inquiry
+app.post('/create-inquiry', async (req, res) => {
+  try {
+    const { email, message } = req.body;
+
+    if (!email || !message) {
+      return res.status(400).json({ error: 'Email and message are required' });
+    }
+
+    const newInquiry = new Inquiry({
+      email,
+      message,
+      createdAt: new Date(),
+    });
+
+    await newInquiry.save();
+
+    res.status(201).json({ status: 'Ok', message: 'Inquiry submitted successfully' });
+  } catch (error) {
+    console.error('Error submitting inquiry:', error);
+    res.status(500).json({ status: 'Error', message: 'Failed to submit inquiry' });
+  }
+});
+
 
 app.post('/bookings/:id/attach-payment', async (req, res) => {
   const bookingId = req.params.id;
